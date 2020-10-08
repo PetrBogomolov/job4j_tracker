@@ -7,8 +7,6 @@ public class Item {
     private int id;
     private String name;
     private LocalDateTime created = LocalDateTime.now();
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
-    private String createdFormatter = created.format(formatter);
 
     public Item() {
     }
@@ -22,20 +20,14 @@ public class Item {
         this.name = name;
     }
 
-    public DateTimeFormatter getFormatter() {
-        return formatter;
-    }
-
-    public String getCreatedFormatter() {
-        return createdFormatter;
-    }
-
     @Override
     public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
+        String createdFormatter = created.format(formatter);
         return "Item{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", createdFormatter='" + createdFormatter + '\'' +
+                ", created='" + createdFormatter + '\'' +
                 '}';
     }
 
