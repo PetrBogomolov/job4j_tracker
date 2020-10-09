@@ -45,6 +45,7 @@ public class Tracker {
             if (items[index].getName().equals(key)) {
                 result[size] = items[index];
                 size++;
+                break;
             }
         }
         return Arrays.copyOf(result, size);
