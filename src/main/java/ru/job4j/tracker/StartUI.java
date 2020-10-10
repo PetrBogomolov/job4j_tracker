@@ -10,7 +10,7 @@ public class StartUI {
         System.out.println(tracker.findById(1));
         System.out.println(tracker.findById(2));
         System.out.println();
-        for (Item index: tracker.findAll(tracker.getItems())) {
+        for (Item index: tracker.findAll()) {
             System.out.println(index);
         }
         System.out.println();
