@@ -2,8 +2,8 @@ package ru.job4j.tracker;
 
 public class StartUI {
     public static void main(String[] args) {
-        Item first = new Item(12, "Petr");
-        Item second = new Item(13, "Dima");
+        Item first = new Item(11, "Petr");
+        Item second = new Item(12, "Dima");
         Tracker tracker = new Tracker();
         tracker.add(first);
         tracker.add(second);
@@ -17,5 +17,9 @@ public class StartUI {
         for (Item index : tracker.findByName("Petr")) {
             System.out.println(index);
         }
+
+        System.out.println(tracker.replace(2,new Item("Artur")));
+        System.out.println(tracker.findById(0));
+
     }
 }
