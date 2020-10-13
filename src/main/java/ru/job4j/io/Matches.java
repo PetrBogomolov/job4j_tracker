@@ -13,11 +13,19 @@ public class Matches {
         System.out.print("Enter the second player's name: ");
         String player2 = inputName.nextLine();
         while (matches > 0) {
-            System.out.print("Walks in the game " + player1 + " : ");
-            matches -= inputNumber.nextInt();
+            int numberPlayer1;
+            int numberPlayer2;
+            do {
+                System.out.print("Walks in the game " + player1 + " : ");
+                numberPlayer1 = inputNumber.nextInt();
+            } while (numberPlayer1 < 1 || numberPlayer1 > 3);
+            matches -= numberPlayer1;
             System.out.println("There are " + matches + " matches left in the game");
-            System.out.print("Walks in the game  " + player2 + " : ");
-            matches -= inputNumber.nextInt();
+            do {
+                System.out.print("Walks in the game  " + player2 + " : ");
+                numberPlayer2 = inputNumber.nextInt();
+            } while (numberPlayer2 < 1 || numberPlayer2 > 3);
+            matches -= numberPlayer2;
             System.out.println("There are " + matches + " matches left in the game");
         }
         System.out.println("Game Over!!!");
