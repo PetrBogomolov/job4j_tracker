@@ -21,28 +21,20 @@ public class StartUI {
     }
 
     public static void editItem(Input input, Tracker tracker) {
-        String answer = input.askString("Are you sure you want to make changes item?: ");
-        if (answer.equals("yes")) {
-            int id = input.askInt("Enter id item: ");
-            String name = input.askString("Enter name new item: ");
-            Item replacement = new Item(name);
-            String result = tracker.replace(id, replacement) ? "Replacement was successful" : "Error! Try again";
-            System.out.println(result);
-        } else {
-            System.out.println("Select another option");
-        }
+        int id = input.askInt("Enter id item: ");
+        String name = input.askString("Enter name new item: ");
+        Item replacement = new Item(name);
+        String result = tracker.replace(id, replacement) ? "Replacement was successful" : "Error! Try again";
+        System.out.println(result);
     }
 
     public static void deleteItem(Input input, Tracker tracker) {
-        String answer = input.askString("Are you sure you want to delete item?: ");
-        if (answer.equals("yes")) {
-            int id = input.askInt("Enter id item: ");
-            boolean result = tracker.delete(id);
-            if (result) {
-                System.out.println("Delete was successful");
-            } else {
-                System.out.println("Select another option");
-            }
+        int id = input.askInt("Enter id item: ");
+        boolean result = tracker.delete(id);
+        if (result) {
+            System.out.println("Delete was successful");
+        } else {
+            System.out.println("Select another option");
         }
     }
 
