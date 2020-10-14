@@ -1,21 +1,21 @@
 package ru.job4j.tracker;
 
-import java.util.Scanner;
+import ru.job4j.tracker.interfeces.ConsoleInput;
+import ru.job4j.tracker.interfeces.Input;
+
 public class StartUI {
 
-    public void init(Scanner scanner, Tracker tracker) {
+    public void init(Input input, Tracker tracker) {
         boolean run = true;
         while (run) {
             this.showMenu();
-            System.out.print("Select: ");
-            int select = Integer.valueOf(scanner.nextLine());
+            int select = input.askInt("Select: ");
             if (select == 6) {
                 System.out.println("Program exit");
                 run = false;
             } else if (select == 0) {
                 System.out.println("=== Create a new Item ====");
-                System.out.print("Enter name: ");
-                String name = scanner.nextLine();
+                String name = input.askString("Enter name: ");
                 Item item = new Item(name);
                 tracker.add(item);
             } else if (select == 1) {
@@ -25,13 +25,10 @@ public class StartUI {
                     System.out.println(index);
                 }
             } else if (select == 2) {
-                System.out.print("Are you sure you want to make changes item?: ");
-                String answer = scanner.nextLine();
+                String answer = input.askString("Are you sure you want to make changes item?: ");
                 if (answer.equals("yes")) {
-                    System.out.print("Enter id item: ");
-                    int id = Integer.valueOf(scanner.nextLine());
-                    System.out.print("Enter name new item: ");
-                    String name = scanner.nextLine();
+                    int id = input.askInt("Enter id item: ");
+                    String name = input.askString("Enter name new item: ");
                     Item replacement = new Item(name);
                     String result = tracker.replace(id, replacement) ? "Replacement was successful" : "Error! Try again";
                     System.out.println(result);
@@ -39,11 +36,9 @@ public class StartUI {
                     System.out.println("Select another option");
                 }
             } else if (select == 3) {
-                System.out.print("Are you sure you want to delete item?: ");
-                String answer = scanner.nextLine();
+                String answer = input.askString("Are you sure you want to delete item?: ");
                 if (answer.equals("yes")) {
-                    System.out.print("Enter id item: ");
-                    int id = Integer.valueOf(scanner.nextLine());
+                    int id = input.askInt("Enter id item: ");
                     boolean result = tracker.delete(id);
                     if (result) {
                         System.out.println("Delete was successful");
@@ -53,8 +48,7 @@ public class StartUI {
                 }
             } else if (select == 4) {
                 System.out.println("=== Search for a request by id ===");
-                System.out.print("Enter id item: ");
-                int id = Integer.valueOf(scanner.nextLine());
+                int id = input.askInt("Enter id item: ");
                 Item resultSearch = tracker.findById(id);
                 if (resultSearch != null) {
                     System.out.print("Result of search: ");
@@ -65,8 +59,7 @@ public class StartUI {
 
             } else if (select == 5) {
                 System.out.println("=== Search for a request by name ===");
-                System.out.print("Enter name item: ");
-                String name = scanner.nextLine();
+                String name = input.askString("Enter name item: ");
                 Item[] resultSearch = tracker.findByName(name);
                 if (resultSearch.length > 0) {
                 System.out.println("Result of search: ");
@@ -93,7 +86,7 @@ public class StartUI {
 
     public static void main(String[] args) {
         Tracker tracker = new Tracker();
-        Scanner scanner = new Scanner(System.in);
+        Input input = new ConsoleInput();
         tracker.add(new Item("Petr"));
         tracker.add(new Item("Dima"));
         tracker.add(new Item("Ivan"));
@@ -101,6 +94,6 @@ public class StartUI {
         tracker.add(new Item("Vika"));
         tracker.add(new Item("Elena"));
         tracker.add(new Item("Dima"));
-        new StartUI().init(scanner, tracker);
+        new StartUI().init(input, tracker);
     }
 }
