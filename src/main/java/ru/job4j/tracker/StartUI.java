@@ -5,6 +5,73 @@ import ru.job4j.tracker.interfeces.Input;
 
 public class StartUI {
 
+    public static void createItem(Input input, Tracker tracker) {
+        System.out.println("=== Create a new Item ====");
+        String name = input.askString("Enter name: ");
+        Item item = new Item(name);
+        tracker.add(item);
+    }
+
+    public static void showAllItem(Input input, Tracker tracker) {
+        System.out.println("=== All items ===");
+        Item[] items = tracker.findAll();
+        for (Item index: items) {
+            System.out.println(index);
+        }
+    }
+
+    public static void editItem(Input input, Tracker tracker) {
+        String answer = input.askString("Are you sure you want to make changes item?: ");
+        if (answer.equals("yes")) {
+            int id = input.askInt("Enter id item: ");
+            String name = input.askString("Enter name new item: ");
+            Item replacement = new Item(name);
+            String result = tracker.replace(id, replacement) ? "Replacement was successful" : "Error! Try again";
+            System.out.println(result);
+        } else {
+            System.out.println("Select another option");
+        }
+    }
+
+    public static void deleteItem(Input input, Tracker tracker) {
+        String answer = input.askString("Are you sure you want to delete item?: ");
+        if (answer.equals("yes")) {
+            int id = input.askInt("Enter id item: ");
+            boolean result = tracker.delete(id);
+            if (result) {
+                System.out.println("Delete was successful");
+            } else {
+                System.out.println("Select another option");
+            }
+        }
+    }
+
+    public static void findById(Input input, Tracker tracker) {
+        System.out.println("=== Search for a request by id ===");
+        int id = input.askInt("Enter id item: ");
+        Item resultSearch = tracker.findById(id);
+        if (resultSearch != null) {
+            System.out.print("Result of search: ");
+            System.out.println(resultSearch);
+        } else {
+            System.out.println("The request with this number was not found");
+        }
+    }
+
+    public static void findByName(Input input, Tracker tracker) {
+        System.out.println("=== Search for a request by name ===");
+        String name = input.askString("Enter name item: ");
+        Item[] resultSearch = tracker.findByName(name);
+        if (resultSearch.length > 0) {
+            System.out.println("Result of search: ");
+            for (Item index: resultSearch) {
+                System.out.println(index);
+            }
+        } else {
+            System.out.println("The request with this name was not found");
+        }
+    }
+
     public void init(Input input, Tracker tracker) {
         boolean run = true;
         while (run) {
@@ -14,61 +81,17 @@ public class StartUI {
                 System.out.println("Program exit");
                 run = false;
             } else if (select == 0) {
-                System.out.println("=== Create a new Item ====");
-                String name = input.askString("Enter name: ");
-                Item item = new Item(name);
-                tracker.add(item);
+                StartUI.createItem(input, tracker);
             } else if (select == 1) {
-                System.out.println("=== All items ===");
-                Item[] items = tracker.findAll();
-                for (Item index: items) {
-                    System.out.println(index);
-                }
+               StartUI.showAllItem(input, tracker);
             } else if (select == 2) {
-                String answer = input.askString("Are you sure you want to make changes item?: ");
-                if (answer.equals("yes")) {
-                    int id = input.askInt("Enter id item: ");
-                    String name = input.askString("Enter name new item: ");
-                    Item replacement = new Item(name);
-                    String result = tracker.replace(id, replacement) ? "Replacement was successful" : "Error! Try again";
-                    System.out.println(result);
-                } else {
-                    System.out.println("Select another option");
-                }
+                StartUI.editItem(input, tracker);
             } else if (select == 3) {
-                String answer = input.askString("Are you sure you want to delete item?: ");
-                if (answer.equals("yes")) {
-                    int id = input.askInt("Enter id item: ");
-                    boolean result = tracker.delete(id);
-                    if (result) {
-                        System.out.println("Delete was successful");
-                    } else {
-                        System.out.println("Select another option");
-                    }
-                }
+               StartUI.deleteItem(input, tracker);
             } else if (select == 4) {
-                System.out.println("=== Search for a request by id ===");
-                int id = input.askInt("Enter id item: ");
-                Item resultSearch = tracker.findById(id);
-                if (resultSearch != null) {
-                    System.out.print("Result of search: ");
-                    System.out.println(resultSearch);
-                } else {
-                    System.out.println("The request with this number was not found");
-                }
-
+                StartUI.findById(input, tracker);
             } else if (select == 5) {
-                System.out.println("=== Search for a request by name ===");
-                String name = input.askString("Enter name item: ");
-                Item[] resultSearch = tracker.findByName(name);
-                if (resultSearch.length > 0) {
-                System.out.println("Result of search: ");
-                for (Item index: resultSearch) {
-                    System.out.println(index);
-                }
-                } else {
-                        System.out.println("The request with this name was not found");
-                }
+                StartUI.findByName(input, tracker);
             }
         }
     }
