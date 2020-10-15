@@ -3,8 +3,15 @@ package ru.job4j.tracker.interfeces.action;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 import ru.job4j.tracker.interfeces.input.Input;
+import ru.job4j.tracker.interfeces.output.Output;
 
 public class CreateAction implements UserAction {
+    private final Output out;
+
+    public CreateAction(Output out) {
+        this.out = out;
+    }
+
     @Override
     public String name() {
         return "=== Create a new Item ====";
@@ -16,9 +23,9 @@ public class CreateAction implements UserAction {
         Item item = new Item(name);
         tracker.add(item);
         if (item.getName().equals(name)) {
-            System.out.println("Create was successful");
+            out.println("Create was successful");
         } else {
-            System.out.println("Error! Try again");
+            out.println("Error! Try again");
         }
         return true;
     }

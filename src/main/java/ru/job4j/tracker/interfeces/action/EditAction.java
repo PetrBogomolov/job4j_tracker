@@ -3,8 +3,15 @@ package ru.job4j.tracker.interfeces.action;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 import ru.job4j.tracker.interfeces.input.Input;
+import ru.job4j.tracker.interfeces.output.Output;
 
 public class EditAction implements UserAction {
+    private final Output out;
+
+    public EditAction(Output out) {
+        this.out = out;
+    }
+
     @Override
     public String name() {
         return "=== Edit item ===";
@@ -16,7 +23,7 @@ public class EditAction implements UserAction {
         String name = input.askString("Enter name new item: ");
         Item replacement = new Item(name);
         String result = tracker.replace(id, replacement) ? "Replacement was successful" : "Error! Try again";
-        System.out.println(result);
+        out.println(result);
         return true;
     }
 }

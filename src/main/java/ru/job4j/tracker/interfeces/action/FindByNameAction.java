@@ -3,8 +3,15 @@ package ru.job4j.tracker.interfeces.action;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 import ru.job4j.tracker.interfeces.input.Input;
+import ru.job4j.tracker.interfeces.output.Output;
 
 public class FindByNameAction implements UserAction {
+    private final Output out;
+
+    public FindByNameAction(Output out) {
+        this.out = out;
+    }
+
     @Override
     public String name() {
         return "=== Search for a request by name ===";
@@ -15,12 +22,12 @@ public class FindByNameAction implements UserAction {
         String name = input.askString("Enter name item: ");
         Item[] resultSearch = tracker.findByName(name);
         if (resultSearch.length > 0) {
-            System.out.println("Result of search: ");
+            out.println("Result of search: ");
             for (Item index: resultSearch) {
-                System.out.println(index);
+                out.println(index);
             }
         } else {
-            System.out.println("The request with this name was not found");
+            out.println("The request with this name was not found");
         }
         return true;
     }
