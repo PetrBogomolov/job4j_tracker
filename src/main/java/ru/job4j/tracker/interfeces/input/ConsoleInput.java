@@ -1,4 +1,4 @@
-package ru.job4j.tracker.interfeces;
+package ru.job4j.tracker.interfeces.input;
 
 import java.util.Scanner;
 
