@@ -6,6 +6,7 @@ public class FindEl {
         for (int index = 0; index < array.length; index++) {
             if (array[index].equals(key)) {
                 result = index;
+                break;
             } else {
                 throw new ElementNotFoundException("Element don't found");
             }
@@ -16,7 +17,7 @@ public class FindEl {
     public static void main(String[] args) {
         String[] array = {"element1", "element2", "element3"};
         try {
-            indexOf(array, "element1");
+            System.out.println(indexOf(array, "element1"));
         } catch (ElementNotFoundException e) {
             e.printStackTrace();
         }
