@@ -7,18 +7,21 @@ import ru.job4j.tracker.interfeces.input.Input;
 import ru.job4j.tracker.interfeces.input.StubInput;
 import ru.job4j.tracker.interfeces.output.ConsoleOutput;
 import ru.job4j.tracker.interfeces.output.Output;
+import ru.job4j.tracker.interfeces.output.StubOutput;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class StartUITest {
     private Output output;
+    private Output out;
     private Tracker tracker;
 
     @Before
     public void setup() {
         output = new ConsoleOutput();
         tracker = new Tracker();
+        out = new StubOutput();
     }
 
     @Test
@@ -53,8 +56,18 @@ public class StartUITest {
         String[] answers = {"0", "Roma", "1", "Roma", "2"};
         Input input = new StubInput(answers);
         UserAction[] actions = {new CreateAction(output), new FindByNameAction(output), new ExitAction(output)};
-        new StartUI(output).init(input, tracker, actions);
-        assertThat(tracker.findById(1).getName(), is("Roma"));
+        new StartUI(out).init(input, tracker, actions);
+        assertThat(out.toString(), is("Menu\r\n" +
+                                           "0.=== Create a new Item ====\r\n" +
+                                           "1.=== Search for a request by name ===\r\n" +
+                                           "2.=== Exit ===\r\nMenu\r\n" +
+                                           "0.=== Create a new Item ====\r\n" +
+                                           "1.=== Search for a request by name ===\r\n" +
+                                           "2.=== Exit ===\r\n" +
+                                           "Menu\r\n" +
+                                           "0.=== Create a new Item ====\r\n" +
+                                           "1.=== Search for a request by name ===\r\n" +
+                                           "2.=== Exit ===\r\n"));
     }
 
     @Test
@@ -62,8 +75,18 @@ public class StartUITest {
         String[] answers = {"0", "new item", "1", "1", "2"};
         Input input = new StubInput(answers);
         UserAction[] actions = {new CreateAction(output), new FindByIdAction(output), new ExitAction(output)};
-        new StartUI(output).init(input, tracker, actions);
-        assertThat(tracker.findById(1).getName(), is("new item"));
+        new StartUI(out).init(input, tracker, actions);
+        assertThat(out.toString(), is("Menu\r\n" +
+                                            "0.=== Create a new Item ====\r\n" +
+                                            "1.=== Search for a request by id ===\r\n" +
+                                            "2.=== Exit ===\r\nMenu\r\n" +
+                                            "0.=== Create a new Item ====\r\n" +
+                                            "1.=== Search for a request by id ===\r\n" +
+                                            "2.=== Exit ===\r\n" +
+                                            "Menu\r\n" +
+                                            "0.=== Create a new Item ====\r\n" +
+                                            "1.=== Search for a request by id ===\r\n" +
+                                            "2.=== Exit ===\r\n"));
     }
 
     @Test
@@ -71,10 +94,22 @@ public class StartUITest {
         String[] answers = {"0", "Roma", "0", "Dima", "1", "2"};
         Input input = new StubInput(answers);
         UserAction[] actions = {new CreateAction(output), new ShowAllAction(output), new ExitAction(output)};
-        new StartUI(output).init(input, tracker, actions);
-        Item[] items = tracker.findAll();
-        String[]result = {items[0].getName(), items[1].getName()};
-        String[] expected = {"Roma", "Dima"};
-        assertThat(expected, is(result));
+        new StartUI(out).init(input, tracker, actions);
+        assertThat(out.toString(), is("Menu\r\n" +
+                                            "0.=== Create a new Item ====\r\n" +
+                                            "1.=== Show all items ===\r\n" +
+                                            "2.=== Exit ===\r\n" +
+                                            "Menu\r\n" +
+                                            "0.=== Create a new Item ====\r\n" +
+                                            "1.=== Show all items ===\r\n" +
+                                            "2.=== Exit ===\r\n" +
+                                            "Menu\r\n" +
+                                            "0.=== Create a new Item ====\r\n" +
+                                            "1.=== Show all items ===\r\n" +
+                                            "2.=== Exit ===\r\n" +
+                                            "Menu\r\n" +
+                                            "0.=== Create a new Item ====\r\n" +
+                                            "1.=== Show all items ===\r\n" +
+                                            "2.=== Exit ===\r\n"));
     }
 }
