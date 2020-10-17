@@ -2,13 +2,11 @@ package ru.job4j.exception.project;
 
 public class UserStore {
     public static User findUser(User[] users, String login) throws UserNotFoundException {
-        User result = new User();
+        User result = null;
         for (User user : users) {
             if (user.getUserName().equals(login)) {
                 result = user;
                 break;
-            } else {
-                result = null;
             }
         }
         if (result == null) {
@@ -33,8 +31,10 @@ public class UserStore {
             if (validate(user)) {
                 System.out.println("This user has an access");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (UserInvalidException ui) {
+            ui.printStackTrace();
+        } catch (UserNotFoundException uf) {
+            uf.printStackTrace();
         }
     }
 }
