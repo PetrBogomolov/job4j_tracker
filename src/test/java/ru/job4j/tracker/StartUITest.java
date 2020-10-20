@@ -5,6 +5,7 @@ import org.junit.Test;
 import ru.job4j.tracker.interfeces.action.*;
 import ru.job4j.tracker.interfeces.input.Input;
 import ru.job4j.tracker.interfeces.input.StubInput;
+import ru.job4j.tracker.interfeces.input.ValidateInput;
 import ru.job4j.tracker.interfeces.output.ConsoleOutput;
 import ru.job4j.tracker.interfeces.output.Output;
 import ru.job4j.tracker.interfeces.output.StubOutput;
@@ -128,5 +129,21 @@ public class StartUITest {
                                             + "Programm exit!%n"
                                              )
         ));
+    }
+
+    @Test
+    public void whenInvalidInput() {
+        Input in = new StubInput(new String[] {"1"});
+        ValidateInput input = new ValidateInput(out, in);
+        int selected = input.askInt("Enter menu:");
+        assertThat(selected, is(1));
+    }
+
+    @Test
+    public void whenNotInvalid() {
+        Input in = new StubInput(new String[] {"one", "1"});
+        ValidateInput input = new ValidateInput(out, in);
+        int selected = input.askInt("Enter menu:");
+        assertThat(out.toString(), is("Please enter validate data again.\r\n"));
     }
 }
