@@ -12,7 +12,9 @@ public class UniqueText {
         Collections.addAll(check, origin);
         for (String word : copy) {
            result = check.contains(word);
-           break;
+           if (!result) {
+               break;
+           }
         }
         return result;
     }
