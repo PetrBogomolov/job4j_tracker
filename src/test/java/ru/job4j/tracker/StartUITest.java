@@ -9,7 +9,6 @@ import ru.job4j.tracker.interfeces.input.ValidateInput;
 import ru.job4j.tracker.interfeces.output.ConsoleOutput;
 import ru.job4j.tracker.interfeces.output.Output;
 import ru.job4j.tracker.interfeces.output.StubOutput;
-
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -31,7 +30,7 @@ public class StartUITest {
         Input input = new StubInput(answers);
         UserAction[] actions = {new CreateAction(output), new ExitAction(output)};
         new StartUI(output).init(input, tracker, actions);
-        assertThat(tracker.findAll()[0].getName(), is("Item name"));
+        assertThat(tracker.findAll().get(0).getName(), is("Item name"));
     }
 
     @Test
