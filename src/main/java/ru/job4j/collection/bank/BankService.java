@@ -14,12 +14,9 @@ public class BankService {
     public void addAccount(String passport, Account account) {
         User user = findByPassport(passport);
         List<Account> value = users.get(user);
-        for (Account found : value) {
-            if (!found.getRequisite().equals(account.getRequisite())) {
-                value.add(account);
-            } else {
-                System.out.println("Account already created");
-            }
+        boolean result = value.contains(account);
+        if (!result) {
+            value.add(account);
         }
     }
 
@@ -36,11 +33,26 @@ public class BankService {
     public Account findByRequisite(String passport, String requisite) {
         Account result = null;
         User user = findByPassport(passport);
-        List<Account> accounts = users.get(user);
-        for (Account found : accounts) {
-          if (found.getRequisite().equals(requisite)) {
-              result = found;
-          }
+        if (user != null) {
+            List<Account> accounts = users.get(user);
+            for (Account found : accounts) {
+                if (found.getRequisite().equals(requisite)) {
+                    result = found;
+                }
+            }
+        }
+        return result;
+    }
+
+    public boolean transferMoney(String srcPassport, String srcRequisite,
+                                 String destPassport, String destRequisite, double amount) {
+        boolean result = false;
+        Account sourse = findByRequisite(srcPassport, srcRequisite);
+        Account dest = findByRequisite(destPassport, destRequisite);
+        if (amount <= sourse.getBalance()) {
+            sourse.setBalance(sourse.getBalance() - amount);
+            dest.setBalance(dest.getBalance() + amount);
+            result = true;
         }
         return result;
     }
