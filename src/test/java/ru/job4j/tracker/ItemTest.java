@@ -16,14 +16,14 @@ public class ItemTest {
                 new Item(5, "item 1"),
                 new Item(4, "item 2"),
                 new Item(1, "item 3"),
-                new Item(9, "item 4")
+                new Item(9, "item4")
                 );
         Collections.sort(items);
         List<Item> result = Arrays.asList(
                 new Item(1, "item 3"),
                 new Item(4, "item 2"),
                 new Item(5, "item 1"),
-                new Item(9, "item 4")
+                new Item(9, "item4")
         );
         assertEquals(items, result);
     }
@@ -34,11 +34,11 @@ public class ItemTest {
                 new Item(5, "item 1"),
                 new Item(4, "item 2"),
                 new Item(1, "item 3"),
-                new Item(9, "item 4")
+                new Item(9, "item4")
         );
         Collections.sort(items, Collections.reverseOrder());
         List<Item> result = Arrays.asList(
-                new Item(9, "item 4"),
+                new Item(9, "item4"),
                 new Item(5, "item 1"),
                 new Item(4, "item 2"),
                 new Item(1, "item 3")
