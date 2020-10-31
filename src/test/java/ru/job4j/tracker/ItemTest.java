@@ -1,8 +1,10 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+import ru.job4j.tracker.comparator.SortByIdDecrease;
 import ru.job4j.tracker.comparator.SortByNameDecrease;
 import ru.job4j.tracker.comparator.SortByNameItem;
+import ru.job4j.tracker.comparator.SotrByIdIncrease;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +20,7 @@ public class ItemTest {
                 new Item(1, "item 3"),
                 new Item(9, "item4")
                 );
-        Collections.sort(items);
+        Collections.sort(items, new SotrByIdIncrease());
         List<Item> result = Arrays.asList(
                 new Item(1, "item 3"),
                 new Item(4, "item 2"),
@@ -36,7 +38,7 @@ public class ItemTest {
                 new Item(1, "item 3"),
                 new Item(9, "item4")
         );
-        Collections.sort(items, Collections.reverseOrder());
+        Collections.sort(items, new SortByIdDecrease());
         List<Item> result = Arrays.asList(
                 new Item(9, "item4"),
                 new Item(5, "item 1"),
