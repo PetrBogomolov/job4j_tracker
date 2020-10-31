@@ -53,10 +53,14 @@ public class BankService {
         boolean result = false;
         Account sourse = findByRequisite(srcPassport, srcRequisite);
         Account dest = findByRequisite(destPassport, destRequisite);
-        if (amount <= sourse.getBalance()) {
-            sourse.setBalance(sourse.getBalance() - amount);
-            dest.setBalance(dest.getBalance() + amount);
-            result = true;
+        if (sourse != null && dest != null) {
+            if (amount <= sourse.getBalance()) {
+                sourse.setBalance(sourse.getBalance() - amount);
+                dest.setBalance(dest.getBalance() + amount);
+                result = true;
+            }
+        } else {
+            System.out.println("Account not found");
         }
         return result;
     }
