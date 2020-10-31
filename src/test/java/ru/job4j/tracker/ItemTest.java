@@ -50,8 +50,8 @@ public class ItemTest {
     public void whenSortOfIncreaseByNameSuccessful() {
         List<Item> items = Arrays.asList(
                 new Item(5, "item 1"),
-                new Item(4, "item 2"),
                 new Item(1, "item 3"),
+                new Item(4, "item 2"),
                 new Item(9, "item 4")
         );
         Collections.sort(items, new SortByNameItem());
