@@ -9,14 +9,14 @@ public class LexSortTest {
     @Test
     public void sortNum1and2and10() {
         String[] input = {
-                "10. Task.",
-                "1. Task.",
-                "2. Task."
+                "772. Task.",
+                "779. Task.",
+                "773. Task."
         };
         String[] out = {
-                "1. Task.",
-                "2. Task.",
-                "10. Task."
+                "772. Task.",
+                "773. Task.",
+                "779. Task."
         };
         Arrays.sort(input, new LexSort());
         assertThat(input, is(out));
