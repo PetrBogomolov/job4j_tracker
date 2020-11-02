@@ -8,7 +8,7 @@ public class Fact {
     public static int calc(int number) {
         int result = 1;
         if (number < 0) {
-            throw new IllegalArgumentException ("Input number can't be less 0");
+            throw new IllegalArgumentException("Input number can't be less 0");
         }
         for (int index = 1; index <= number; index++) {
             result *= index;

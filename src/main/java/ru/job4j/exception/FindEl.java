@@ -2,14 +2,14 @@ package ru.job4j.exception;
 
 public class FindEl {
     public static int indexOf(String[] array, String key) throws ElementNotFoundException {
-        int result = - 1;
+        int result = -1;
         for (int index = 0; index < array.length; index++) {
             if (array[index].equals(key)) {
                 result = index;
                 break;
             }
         }
-        if (result == - 1) {
+        if (result == -1) {
             throw new ElementNotFoundException("Element don't found");
         }
         return result;

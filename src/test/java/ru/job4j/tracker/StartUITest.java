@@ -26,7 +26,7 @@ public class StartUITest {
 
     @Test
     public void whenCreateItem() {
-        String[] answers = {"0", "Item name" , "1"};
+        String[] answers = {"0", "Item name", "1"};
         Input input = new StubInput(answers);
         UserAction[] actions = {new CreateAction(output), new ExitAction(output)};
         new StartUI(output).init(input, tracker, actions);
@@ -37,7 +37,10 @@ public class StartUITest {
     public void whenEditItemWasItemThenBecomeItem() {
         String[] answers = {"0", "was item", "1", "1", "become item", "2"};
         Input input = new StubInput(answers);
-        UserAction[] actions = {new CreateAction(output), new EditAction(output), new ExitAction(output)};
+        UserAction[] actions = {
+                new CreateAction(output), new EditAction(output),
+                new ExitAction(output)
+        };
         new StartUI(output).init(input, tracker, actions);
         assertThat(tracker.findById(1).getName(), is("become item"));
     }
@@ -46,7 +49,10 @@ public class StartUITest {
     public void whenDeleteItemNewItemThenNull() {
         String[] answers = {"0", "new item", "1", "1", "2"};
         Input input = new StubInput(answers);
-        UserAction[] actions = {new CreateAction(output), new DeletAction(output), new ExitAction(output)};
+        UserAction[] actions = {
+                new CreateAction(output), new DeletAction(output),
+                new ExitAction(output)
+        };
         new StartUI(output).init(input, tracker, actions);
         assertNull(tracker.findById(1));
     }
@@ -55,67 +61,76 @@ public class StartUITest {
     public void whenFindItemByName() {
         String[] answers = {"0", "Roma", "1", "Roma", "2"};
         Input input = new StubInput(answers);
-        UserAction[] actions = {new CreateAction(output), new FindByNameAction(output), new ExitAction(output)};
+        UserAction[] actions = {
+                new CreateAction(output), new FindByNameAction(output),
+                new ExitAction(output)
+        };
         new StartUI(out).init(input, tracker, actions);
-        assertThat(out.toString(), is("Menu\r\n" +
-                                           "0.=== Create a new Item ====\r\n" +
-                                           "1.=== Search for a request by name ===\r\n" +
-                                           "2.=== Exit ===\r\nMenu\r\n" +
-                                           "0.=== Create a new Item ====\r\n" +
-                                           "1.=== Search for a request by name ===\r\n" +
-                                           "2.=== Exit ===\r\n" +
-                                           "Menu\r\n" +
-                                           "0.=== Create a new Item ====\r\n" +
-                                           "1.=== Search for a request by name ===\r\n" +
-                                           "2.=== Exit ===\r\n"));
+        assertThat(out.toString(), is("Menu\r\n"
+                                          + "0.=== Create a new Item ====\r\n"
+                                          + "1.=== Search for a request by name ===\r\n"
+                                          + "2.=== Exit ===\r\nMenu\r\n"
+                                          + "0.=== Create a new Item ====\r\n"
+                                          + "1.=== Search for a request by name ===\r\n"
+                                          + "2.=== Exit ===\r\n"
+                                          + "Menu\r\n"
+                                          + "0.=== Create a new Item ====\r\n"
+                                          + "1.=== Search for a request by name ===\r\n"
+                                          + "2.=== Exit ===\r\n"));
     }
 
     @Test
     public void whenFindItemById() {
         String[] answers = {"0", "new item", "1", "1", "2"};
         Input input = new StubInput(answers);
-        UserAction[] actions = {new CreateAction(output), new FindByIdAction(output), new ExitAction(output)};
+        UserAction[] actions = {
+                new CreateAction(output), new FindByIdAction(output),
+                new ExitAction(output)
+        };
         new StartUI(out).init(input, tracker, actions);
-        assertThat(out.toString(), is("Menu\r\n" +
-                                            "0.=== Create a new Item ====\r\n" +
-                                            "1.=== Search for a request by id ===\r\n" +
-                                            "2.=== Exit ===\r\nMenu\r\n" +
-                                            "0.=== Create a new Item ====\r\n" +
-                                            "1.=== Search for a request by id ===\r\n" +
-                                            "2.=== Exit ===\r\n" +
-                                            "Menu\r\n" +
-                                            "0.=== Create a new Item ====\r\n" +
-                                            "1.=== Search for a request by id ===\r\n" +
-                                            "2.=== Exit ===\r\n"));
+        assertThat(out.toString(), is("Menu\r\n"
+                                           + "0.=== Create a new Item ====\r\n"
+                                           + "1.=== Search for a request by id ===\r\n"
+                                           + "2.=== Exit ===\r\nMenu\r\n"
+                                           + "0.=== Create a new Item ====\r\n"
+                                           + "1.=== Search for a request by id ===\r\n"
+                                           + "2.=== Exit ===\r\n"
+                                           + "Menu\r\n"
+                                           + "0.=== Create a new Item ====\r\n"
+                                           + "1.=== Search for a request by id ===\r\n"
+                                           + "2.=== Exit ===\r\n"));
     }
 
     @Test
     public void whenShowAll() {
         String[] answers = {"0", "Roma", "0", "Dima", "1", "2"};
         Input input = new StubInput(answers);
-        UserAction[] actions = {new CreateAction(output), new ShowAllAction(output), new ExitAction(output)};
+        UserAction[] actions = {
+                new CreateAction(output), new ShowAllAction(output),
+                new ExitAction(output)
+        };
         new StartUI(out).init(input, tracker, actions);
-        assertThat(out.toString(), is("Menu\r\n" +
-                                            "0.=== Create a new Item ====\r\n" +
-                                            "1.=== Show all items ===\r\n" +
-                                            "2.=== Exit ===\r\n" +
-                                            "Menu\r\n" +
-                                            "0.=== Create a new Item ====\r\n" +
-                                            "1.=== Show all items ===\r\n" +
-                                            "2.=== Exit ===\r\n" +
-                                            "Menu\r\n" +
-                                            "0.=== Create a new Item ====\r\n" +
-                                            "1.=== Show all items ===\r\n" +
-                                            "2.=== Exit ===\r\n" +
-                                            "Menu\r\n" +
-                                            "0.=== Create a new Item ====\r\n" +
-                                            "1.=== Show all items ===\r\n" +
-                                            "2.=== Exit ===\r\n"));
+        assertThat(out.toString(), is("Menu\r\n"
+                                           + "0.=== Create a new Item ====\r\n"
+                                           + "1.=== Show all items ===\r\n"
+                                           + "2.=== Exit ===\r\n"
+                                           + "Menu\r\n"
+                                           + "0.=== Create a new Item ====\r\n"
+                                           + "1.=== Show all items ===\r\n"
+                                           + "2.=== Exit ===\r\n"
+                                           + "Menu\r\n"
+                                           + "0.=== Create a new Item ====\r\n"
+                                           + "1.=== Show all items ===\r\n"
+                                           + "2.=== Exit ===\r\n"
+                                           + "Menu\r\n"
+                                           + "0.=== Create a new Item ====\r\n"
+                                           + "1.=== Show all items ===\r\n"
+                                           + "2.=== Exit ===\r\n"));
     }
 
     @Test
     public void whenNotInvalidExitThenInvalidExit() {
-        Input input = new StubInput(new String[] { "1", "0"});
+        Input input = new StubInput(new String[]{"1", "0"});
         UserAction[] actions = {new ExitAction(out)};
         new StartUI(out).init(input, tracker, actions);
         assertThat(out.toString(), is(

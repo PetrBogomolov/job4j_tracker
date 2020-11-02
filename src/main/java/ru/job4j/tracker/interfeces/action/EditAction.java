@@ -22,7 +22,8 @@ public class EditAction implements UserAction {
         int id = input.askInt("Enter id item: ");
         String name = input.askString("Enter name new item: ");
         Item replacement = new Item(name);
-        String result = tracker.replace(id, replacement) ? "Replacement was successful" : "Error! Try again";
+        String result = tracker.replace(id, replacement)
+                ? "Replacement was successful" : "Error! Try again";
         out.println(result);
         return true;
     }

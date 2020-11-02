@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class PhoneDictionaryTest {
 
     @Test
-    public void WhenFyndByName() {
+    public void whenFyndByName() {
         PhoneDictionary phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
@@ -20,7 +20,7 @@ public class PhoneDictionaryTest {
     }
 
     @Test
-    public void WhenFyndBySurname() {
+    public void whenFyndBySurname() {
         PhoneDictionary phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
@@ -30,7 +30,7 @@ public class PhoneDictionaryTest {
     }
 
     @Test
-    public void WhenFyndByPhone() {
+    public void whenFyndByPhone() {
         PhoneDictionary phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
@@ -40,7 +40,7 @@ public class PhoneDictionaryTest {
     }
 
     @Test
-    public void WhenFyndByAdress() {
+    public void whenFyndByAdress() {
         PhoneDictionary phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")

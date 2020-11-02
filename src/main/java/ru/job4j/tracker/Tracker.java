@@ -9,10 +9,10 @@ public class Tracker {
 
     @Override
     public String toString() {
-        return "Tracker{" +
-                "items=" + items +
-                ", ids=" + ids +
-                '}';
+        return "Tracker{"
+                + "items=" + items
+                + ", ids=" + ids
+                + '}';
     }
 
     public Item add(Item item) {
@@ -23,7 +23,7 @@ public class Tracker {
 
     public boolean delete(int id) {
         int index = indexOf(id);
-        if (index != - 1) {
+        if (index != -1) {
             items.remove(index);
             return true;
         }
@@ -59,12 +59,12 @@ public class Tracker {
 
     public Item findById(int id) {
         int index = indexOf(id);
-        return index != - 1 ? items.get(index) : null;
+        return index != -1 ? items.get(index) : null;
     }
 
     public boolean replace(int id, Item item) {
         int index = indexOf(id);
-        if (index != - 1) {
+        if (index != -1) {
             items.set(index, item);
             item.setId(id);
             return true;

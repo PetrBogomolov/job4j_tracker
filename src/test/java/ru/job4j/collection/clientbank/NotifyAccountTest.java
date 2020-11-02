@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class NotifyAccountTest {
 
     @Test
-    public void WhenSentRight() {
+    public void whenSentRight() {
         List<Account> accounts = Arrays.asList(
                 new Account("123", "Petr Arsentev", "eDer3432f"),
                 new Account("123", "Petr Arsentev", "eDer3432f"),
