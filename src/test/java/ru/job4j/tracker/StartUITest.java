@@ -66,17 +66,18 @@ public class StartUITest {
                 new ExitAction(output)
         };
         new StartUI(out).init(input, tracker, actions);
-        assertThat(out.toString(), is("Menu\r\n"
-                                          + "0.=== Create a new Item ====\r\n"
-                                          + "1.=== Search for a request by name ===\r\n"
-                                          + "2.=== Exit ===\r\nMenu\r\n"
-                                          + "0.=== Create a new Item ====\r\n"
-                                          + "1.=== Search for a request by name ===\r\n"
-                                          + "2.=== Exit ===\r\n"
-                                          + "Menu\r\n"
-                                          + "0.=== Create a new Item ====\r\n"
-                                          + "1.=== Search for a request by name ===\r\n"
-                                          + "2.=== Exit ===\r\n"));
+        assertThat(out.toString(), is("Menu" + System.lineSeparator()
+                               + "0.=== Create a new Item ====" + System.lineSeparator()
+                               + "1.=== Search for a request by name ===" + System.lineSeparator()
+                               + "2.=== Exit ===" + System.lineSeparator()
+                               + "Menu" + System.lineSeparator()
+                               + "0.=== Create a new Item ====" + System.lineSeparator()
+                               + "1.=== Search for a request by name ===" + System.lineSeparator()
+                               + "2.=== Exit ===" + System.lineSeparator()
+                               + "Menu" + System.lineSeparator()
+                               + "0.=== Create a new Item ====" + System.lineSeparator()
+                               + "1.=== Search for a request by name ===" + System.lineSeparator()
+                               + "2.=== Exit ===" + System.lineSeparator()));
     }
 
     @Test
@@ -88,17 +89,18 @@ public class StartUITest {
                 new ExitAction(output)
         };
         new StartUI(out).init(input, tracker, actions);
-        assertThat(out.toString(), is("Menu\r\n"
-                                           + "0.=== Create a new Item ====\r\n"
-                                           + "1.=== Search for a request by id ===\r\n"
-                                           + "2.=== Exit ===\r\nMenu\r\n"
-                                           + "0.=== Create a new Item ====\r\n"
-                                           + "1.=== Search for a request by id ===\r\n"
-                                           + "2.=== Exit ===\r\n"
-                                           + "Menu\r\n"
-                                           + "0.=== Create a new Item ====\r\n"
-                                           + "1.=== Search for a request by id ===\r\n"
-                                           + "2.=== Exit ===\r\n"));
+        assertThat(out.toString(), is("Menu" + System.lineSeparator()
+                                + "0.=== Create a new Item ====" + System.lineSeparator()
+                                + "1.=== Search for a request by id ===" + System.lineSeparator()
+                                + "2.=== Exit ===" + System.lineSeparator()
+                                + "Menu" + System.lineSeparator()
+                                + "0.=== Create a new Item ====" + System.lineSeparator()
+                                + "1.=== Search for a request by id ===" + System.lineSeparator()
+                                + "2.=== Exit ===" + System.lineSeparator()
+                                + "Menu" + System.lineSeparator()
+                                + "0.=== Create a new Item ====" + System.lineSeparator()
+                                + "1.=== Search for a request by id ===" + System.lineSeparator()
+                                + "2.=== Exit ===" + System.lineSeparator()));
     }
 
     @Test
@@ -110,22 +112,22 @@ public class StartUITest {
                 new ExitAction(output)
         };
         new StartUI(out).init(input, tracker, actions);
-        assertThat(out.toString(), is("Menu\r\n"
-                                           + "0.=== Create a new Item ====\r\n"
-                                           + "1.=== Show all items ===\r\n"
-                                           + "2.=== Exit ===\r\n"
-                                           + "Menu\r\n"
-                                           + "0.=== Create a new Item ====\r\n"
-                                           + "1.=== Show all items ===\r\n"
-                                           + "2.=== Exit ===\r\n"
-                                           + "Menu\r\n"
-                                           + "0.=== Create a new Item ====\r\n"
-                                           + "1.=== Show all items ===\r\n"
-                                           + "2.=== Exit ===\r\n"
-                                           + "Menu\r\n"
-                                           + "0.=== Create a new Item ====\r\n"
-                                           + "1.=== Show all items ===\r\n"
-                                           + "2.=== Exit ===\r\n"));
+        assertThat(out.toString(), is("Menu" + System.lineSeparator()
+                                           + "0.=== Create a new Item ====" + System.lineSeparator()
+                                           + "1.=== Show all items ===" + System.lineSeparator()
+                                           + "2.=== Exit ===" + System.lineSeparator()
+                                           + "Menu" + System.lineSeparator()
+                                           + "0.=== Create a new Item ====" + System.lineSeparator()
+                                           + "1.=== Show all items ===" + System.lineSeparator()
+                                           + "2.=== Exit ===" + System.lineSeparator()
+                                           + "Menu" + System.lineSeparator()
+                                           + "0.=== Create a new Item ====" + System.lineSeparator()
+                                           + "1.=== Show all items ===" + System.lineSeparator()
+                                           + "2.=== Exit ===" + System.lineSeparator()
+                                           + "Menu" + System.lineSeparator()
+                                           + "0.=== Create a new Item ====" + System.lineSeparator()
+                                           + "1.=== Show all items ===" + System.lineSeparator()
+                                           + "2.=== Exit ===" + System.lineSeparator()));
     }
 
     @Test
@@ -158,6 +160,7 @@ public class StartUITest {
         Input in = new StubInput(new String[] {"one", "1"});
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
-        assertThat(out.toString(), is("Please enter validate data again.\r\n"));
+        assertThat(out.toString(),
+                is("Please enter validate data again." + System.lineSeparator()));
     }
 }
