@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class FreezeStrTest {
 
-    FreezeStr freezeStr;
+    private FreezeStr freezeStr;
 
     @Before
     public void setup() {
