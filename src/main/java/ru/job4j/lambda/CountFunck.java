@@ -6,17 +6,17 @@ import java.util.function.Function;
 
 public class CountFunck {
 
-    public static List<Double> createLinearFunc(int start, int end) {
+    public List<Double> createLinearFunc(int start, int end) {
         Function<Double, Double> func = doub -> (2 * doub + 1);
         return diapason(start, end, func);
     }
 
-    public static List<Double> createSquareFunc(int start, int end) {
+    public List<Double> createSquareFunc(int start, int end) {
         Function<Double, Double> func = doub -> (doub * doub);
         return diapason(start, end, func);
     }
 
-    public static List<Double> createExponentialFunc(int start, int end) {
+    public List<Double> createExponentialFunc(int start, int end) {
         Function<Double, Double> func = doub -> Math.pow(doub, doub);
         return diapason(start, end, func);
     }
