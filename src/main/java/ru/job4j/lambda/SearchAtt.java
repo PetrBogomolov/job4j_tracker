@@ -3,43 +3,34 @@ package ru.job4j.lambda;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.UnaryOperator;
+import java.util.function.Predicate;
+
 
 public class SearchAtt {
     public static List<Attachment> filterSize(List<Attachment> list) {
-        UnaryOperator<List<Attachment>> func = new UnaryOperator<List<Attachment>>() {
-            @Override
-            public List<Attachment> apply(List<Attachment> list) {
-                List<Attachment> result = new ArrayList<>();
-                for (Attachment att : list) {
-                    if (att.getSize() > 100) {
-                        result.add(att);
-                    }
-                }
-                return result;
+        List<Attachment> result = new ArrayList<>();
+        for (Attachment att : list) {
+            Predicate<Attachment> func = attachment -> att.getSize() > 100;
+            if (filter(att, func)) {
+                result.add(att);
             }
-        };
-        return filter(list, func);
+        }
+        return result;
     }
 
    public static List<Attachment> filterName(List<Attachment> list) {
-        UnaryOperator<List<Attachment>> func = new UnaryOperator<List<Attachment>>() {
-            @Override
-            public List<Attachment> apply(List<Attachment> list) {
-                List<Attachment> result = new ArrayList<>();
-                for(Attachment att : list) {
-                    if (att.getName().contains("bug")) {
-                        result.add(att);
-                    }
-                }
-                return result;
-            }
-        };
-        return filter(list, func);
+       List<Attachment> result = new ArrayList<>();
+       for (Attachment att : list) {
+           Predicate<Attachment> func = attachment -> att.getName().contains("bug");
+           if (filter(att, func)) {
+               result.add(att);
+           }
+       }
+       return result;
    }
 
-    private static List<Attachment> filter(List<Attachment> list, UnaryOperator<List<Attachment>> func) {
-        return func.apply(list);
+    private static boolean filter(Attachment attachment, Predicate<Attachment> func) {
+        return func.test(attachment);
     }
 
    public static void main(String[] args) {
