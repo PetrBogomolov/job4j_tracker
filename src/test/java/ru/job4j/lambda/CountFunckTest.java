@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 
 public class CountFunckTest {
 
-    CountFunck countFunck;
+    private CountFunck countFunck;
 
     @Before
     public void setup() {
