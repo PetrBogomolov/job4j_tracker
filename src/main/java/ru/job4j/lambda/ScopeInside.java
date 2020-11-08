@@ -7,7 +7,7 @@ public class ScopeInside {
         int[] number = {1, 2, 3};
         int total = 0;
         for (int i = 0; i < number.length; i++) {
-            int result = total + i;
+            int result = total + number[i];
             total = add(() -> result);
         }
         System.out.println(total);
