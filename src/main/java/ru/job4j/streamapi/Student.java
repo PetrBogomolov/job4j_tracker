@@ -21,11 +21,15 @@ public class Student {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Student student = (Student) o;
-        return scope == student.scope &&
-                Objects.equals(name, student.name);
+        return scope == student.scope
+                && Objects.equals(name, student.name);
     }
 
     @Override
@@ -35,9 +39,9 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "scope=" + scope +
-                ", name='" + name + '\'' +
-                '}';
+        return "Student{"
+               + "scope=" + scope
+               + ", name='" + name + '\''
+               + '}';
     }
 }

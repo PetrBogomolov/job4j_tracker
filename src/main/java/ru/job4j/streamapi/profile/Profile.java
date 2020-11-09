@@ -27,12 +27,16 @@ public class Profile {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Profile profiles = (Profile) o;
-        return age == profiles.age &&
-                Objects.equals(address, profiles.address) &&
-                Objects.equals(name, profiles.name);
+        return age == profiles.age
+                && Objects.equals(address, profiles.address)
+                && Objects.equals(name, profiles.name);
     }
 
     @Override
