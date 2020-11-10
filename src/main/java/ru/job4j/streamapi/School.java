@@ -15,7 +15,6 @@ public class School {
 
     public Map<String, Student> convert(List<Student> students) {
         return students.stream()
-                .distinct()
-                .collect(Collectors.toMap(e -> e.getName(), e -> e));
+                .collect(Collectors.toMap(Student::getName, e -> e, (element, dublicate) -> element));
     }
 }
