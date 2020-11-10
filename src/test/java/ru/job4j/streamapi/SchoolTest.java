@@ -2,8 +2,8 @@ package ru.job4j.streamapi;
 
 import org.junit.Before;
 import org.junit.Test;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 import java.util.function.Predicate;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
@@ -61,4 +61,21 @@ public class SchoolTest {
         assertThat(rsl, is(expected));
     }
 
+    @Test
+    public void whenConvertListThenMap() {
+        List<Student>students = Arrays.asList(
+                new Student(10, "Name 1"),
+                new Student(10, "Name 1"),
+                new Student(20, "Name 2"),
+                new Student(30, "Name 3"),
+                new Student(40, "Name 4")
+        );
+        Map<String, Student> result = school.convert(students);
+        Map<String, Student> expect = new HashMap<>();
+        expect.put("Name 1", new  Student(10, "Name 1"));
+        expect.put("Name 2", new  Student(20, "Name 2"));
+        expect.put("Name 3", new  Student(30, "Name 3"));
+        expect.put("Name 4", new  Student(40, "Name 4"));
+        assertThat(result, is(expect));
+    }
 }
