@@ -22,8 +22,8 @@ public class BankServiceTest {
         Optional<User> user = Optional.of(new User("3434", "Petr Arsentev"));
         BankService bank = new BankService();
         bank.addUser(user);
-        bank.addAccount(user.get().getPassport(), new Account("5546", 150D));
-        assertNull(bank.findByRequisite("34", "5546"));
+        bank.addAccount(user.get().getPassport(), Optional.of(new Account("5546", 150D)));
+        assertThat(bank.findByRequisite("34", "5546"), is(Optional.empty()));
     }
 
     @Test
@@ -31,8 +31,9 @@ public class BankServiceTest {
         Optional<User> user = Optional.of(new User("3434", "Petr Arsentev"));
         BankService bank = new BankService();
         bank.addUser(user);
-        bank.addAccount(user.get().getPassport(), new Account("2324", 143D));
-        assertThat(bank.findByRequisite("3434", "2324"), is(new Account("2324", 143D)));
+        bank.addAccount(user.get().getPassport(), Optional.of(new Account("2324", 143D)));
+        assertThat(bank.findByRequisite("3434", "2324"),
+                is(Optional.of(new Account("2324", 143D))));
     }
 
     @Test
@@ -40,9 +41,11 @@ public class BankServiceTest {
         Optional<User> user = Optional.of(new User("3434", "Petr Arsentev"));
         BankService bank = new BankService();
         bank.addUser(user);
-        bank.addAccount(user.get().getPassport(), new Account("5546", 150D));
-        bank.addAccount(user.get().getPassport(), new Account("113", 50D));
-        bank.transferMoney(user.get().getPassport(), "5546", user.get().getPassport(), "113", 150D);
-        assertThat(bank.findByRequisite(user.get().getPassport(), "113").getBalance(), is(200D));
+        bank.addAccount(user.get().getPassport(), Optional.of(new Account("5546", 150D)));
+        bank.addAccount(user.get().getPassport(), Optional.of(new Account("113", 50D)));
+        bank.transferMoney(user.get().getPassport(), "5546",
+                user.get().getPassport(), "113", 150D);
+        assertThat(bank.findByRequisite(user.get().getPassport(), "113").get().getBalance(),
+                is(200D));
     }
 }
