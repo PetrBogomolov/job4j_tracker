@@ -16,7 +16,8 @@ public class School {
 
     public Map<String, Student> convert(List<Student> students) {
         return students.stream()
-                .collect(Collectors.toMap(Student::getName, e -> e, (element, dublicate) -> element));
+                .collect(Collectors.toMap(Student::getName,
+                        e -> e, (element, dublicate) -> element));
     }
 
     public List<Student> levelOf(List<Student> students, int bound) {

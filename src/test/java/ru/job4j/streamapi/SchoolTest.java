@@ -63,7 +63,7 @@ public class SchoolTest {
 
     @Test
     public void whenConvertListThenMap() {
-        List<Student>students = Arrays.asList(
+        List<Student> students = Arrays.asList(
                 new Student(10, "Name 1"),
                 new Student(10, "Name 1"),
                 new Student(20, "Name 2"),
@@ -83,7 +83,7 @@ public class SchoolTest {
     public void whenSorted() {
         List<Student> input = new ArrayList<>();
         input.add(new Student(28, "Masha"));
-        input.add(new Student(128,"Pety"));
+        input.add(new Student(128, "Pety"));
         List<Student> expected = List.of(
                 new Student(128, "Pety"),
                 new Student(28, "Masha")
@@ -94,7 +94,7 @@ public class SchoolTest {
     @Test
     public void whenOnlyNull() {
         List<Student> input = new ArrayList<>();
-        input.add( null);
+        input.add(null);
         List<Student> expected = List.of();
         assertThat(school.levelOf(input, 100), is(expected));
     }
@@ -102,7 +102,7 @@ public class SchoolTest {
     @Test
     public void whenHasNull() {
         List<Student> input = new ArrayList<>();
-        input.add( null);
+        input.add(null);
         input.add(new Student(28, "Pety"));
         List<Student> expected = List.of(new Student(28, "Pety"));
         assertThat(school.levelOf(input, 10), is(expected));
