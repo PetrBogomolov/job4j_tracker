@@ -15,8 +15,8 @@ public class EasyStream {
    }
 
    public EasyStream map(Function<Integer, Integer> fun) {
-        for (Integer element : save) {
-            save.set(save.indexOf(element), fun.apply(element));
+        for (int index = 0; index < save.size(); index++) {
+            save.set(index, fun.apply(save.get(index)));
         }
         Collections.sort(save);
         return this;
