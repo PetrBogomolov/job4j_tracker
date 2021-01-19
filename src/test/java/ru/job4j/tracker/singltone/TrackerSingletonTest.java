@@ -1,7 +1,8 @@
 package ru.job4j.tracker.singltone;
 
 import org.junit.Test;
-import ru.job4j.tracker.Tracker;
+import ru.job4j.tracker.MemTracker;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
@@ -9,29 +10,29 @@ public class TrackerSingletonTest {
 
     @Test
     public void whenGet2TrackersInTrackerEnumThenHave1Tracker() {
-        Tracker tracker = TrackerEnum.INSTANCE.getTracker();
-        Tracker otherTracker = TrackerEnum.INSTANCE.getTracker();
-        assertThat(tracker, is(otherTracker));
+        MemTracker memTracker = TrackerEnum.INSTANCE.getTracker();
+        MemTracker otherMemTracker = TrackerEnum.INSTANCE.getTracker();
+        assertThat(memTracker, is(otherMemTracker));
     }
 
     @Test
     public void whenGet2TrackersInTrackerInnerClassThenHave1Tracker() {
-        Tracker tracker = TrackerInnerClass.getInstance().getTracker();
-        Tracker otherTracker = TrackerInnerClass.getInstance().getTracker();
-        assertThat(tracker, is(otherTracker));
+        MemTracker memTracker = TrackerInnerClass.getInstance().getTracker();
+        MemTracker otherMemTracker = TrackerInnerClass.getInstance().getTracker();
+        assertThat(memTracker, is(otherMemTracker));
     }
 
     @Test
     public void whenGet2TrackersInTrackerStaticThenHave1Tracker() {
-        Tracker tracker = TrackerStatic.getInstance().getTracker();
-        Tracker otherTracker = TrackerStatic.getInstance().getTracker();
-        assertThat(tracker, is(otherTracker));
+        MemTracker memTracker = TrackerStatic.getInstance().getTracker();
+        MemTracker otherMemTracker = TrackerStatic.getInstance().getTracker();
+        assertThat(memTracker, is(otherMemTracker));
     }
 
     @Test
     public void whenGet2TrackersInTrackerStaticFinalThenHave1Traker() {
-        Tracker tracker = TrackerStaticFinal.getINSTANCE().getTracker();
-        Tracker otherTracker = TrackerStaticFinal.getINSTANCE().getTracker();
-        assertThat(tracker, is(otherTracker));
+        MemTracker memTracker = TrackerStaticFinal.getINSTANCE().getTracker();
+        MemTracker otherMemTracker = TrackerStaticFinal.getINSTANCE().getTracker();
+        assertThat(memTracker, is(otherMemTracker));
     }
 }

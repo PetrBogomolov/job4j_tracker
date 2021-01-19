@@ -1,13 +1,13 @@
 package ru.job4j.tracker.singltone;
 
-import ru.job4j.tracker.Tracker;
+import ru.job4j.tracker.MemTracker;
 
 public enum TrackerEnum {
     INSTANCE;
 
-    private Tracker tracker = new Tracker();
+    private MemTracker memTracker = new MemTracker();
 
-    public Tracker getTracker() {
-        return tracker;
+    public MemTracker getTracker() {
+        return memTracker;
     }
 }

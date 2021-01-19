@@ -6,6 +6,8 @@ import ru.job4j.tracker.interfeces.input.Input;
 import ru.job4j.tracker.interfeces.input.ValidateInput;
 import ru.job4j.tracker.interfeces.output.ConsoleOutput;
 import ru.job4j.tracker.interfeces.output.Output;
+import ru.job4j.tracker.interfeces.store.SqlTracker;
+import ru.job4j.tracker.interfeces.store.Store;
 
 public class StartUI {
     private final Output out;
@@ -14,7 +16,7 @@ public class StartUI {
         this.out = out;
     }
 
-    public void init(Input input, Tracker tracker, UserAction[] actions) {
+    public void init(Input input, Store memTracker, UserAction[] actions) {
         boolean run = true;
         while (run) {
             this.showMenu(actions);
@@ -24,7 +26,7 @@ public class StartUI {
                 continue;
             }
                 UserAction action = actions[select];
-                run = action.execute(input, tracker);
+                run = action.execute(input, memTracker);
             }
     }
 
@@ -37,13 +39,17 @@ public class StartUI {
 
     public static void main(String[] args) {
         Output output = new ConsoleOutput();
-        Tracker tracker = new Tracker();
         Input input = new ValidateInput(output, new ConsoleInput(output));
-        UserAction[] actions = {
-                new CreateAction(output), new ShowAllAction(output),
-                new EditAction(output), new DeletAction(output), new FindByIdAction(output),
-                new FindByNameAction(output), new ExitAction(output)
-        };
-        new StartUI(output).init(input, tracker, actions);
+        try (Store tracker = new SqlTracker()) {
+            tracker.init();
+            UserAction[] actions = {
+                    new CreateAction(output), new ShowAllAction(output),
+                    new EditAction(output), new DeletAction(output), new FindByIdAction(output),
+                    new FindByNameAction(output), new ExitAction(output)
+            };
+            new StartUI(output).init(input, tracker, actions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

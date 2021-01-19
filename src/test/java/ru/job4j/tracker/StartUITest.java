@@ -9,18 +9,21 @@ import ru.job4j.tracker.interfeces.input.ValidateInput;
 import ru.job4j.tracker.interfeces.output.ConsoleOutput;
 import ru.job4j.tracker.interfeces.output.Output;
 import ru.job4j.tracker.interfeces.output.StubOutput;
+import ru.job4j.tracker.interfeces.store.SqlTracker;
+import ru.job4j.tracker.interfeces.store.Store;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class StartUITest {
     private Output output;
     private Output out;
-    private Tracker tracker;
+    private Store memTracker;
 
     @Before
     public void setup() {
         output = new ConsoleOutput();
-        tracker = new Tracker();
+        memTracker = new SqlTracker();
         out = new StubOutput();
     }
 
@@ -29,8 +32,8 @@ public class StartUITest {
         String[] answers = {"0", "Item name", "1"};
         Input input = new StubInput(answers);
         UserAction[] actions = {new CreateAction(output), new ExitAction(output)};
-        new StartUI(output).init(input, tracker, actions);
-        assertThat(tracker.findAll().get(0).getName(), is("Item name"));
+        new StartUI(output).init(input, memTracker, actions);
+        assertThat(memTracker.findAll().get(0).getName(), is("Item name"));
     }
 
     @Test
@@ -41,8 +44,8 @@ public class StartUITest {
                 new CreateAction(output), new EditAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions);
-        assertThat(tracker.findById(1).getName(), is("become item"));
+        new StartUI(output).init(input, memTracker, actions);
+        assertThat(memTracker.findById(1).getName(), is("become item"));
     }
 
     @Test
@@ -53,8 +56,8 @@ public class StartUITest {
                 new CreateAction(output), new DeletAction(output),
                 new ExitAction(output)
         };
-        new StartUI(output).init(input, tracker, actions);
-        assertNull(tracker.findById(1));
+        new StartUI(output).init(input, memTracker, actions);
+        assertNull(memTracker.findById(1));
     }
 
     @Test
@@ -65,7 +68,7 @@ public class StartUITest {
                 new CreateAction(output), new FindByNameAction(output),
                 new ExitAction(output)
         };
-        new StartUI(out).init(input, tracker, actions);
+        new StartUI(out).init(input, memTracker, actions);
         assertThat(out.toString(), is("Menu" + System.lineSeparator()
                                + "0.=== Create a new Item ====" + System.lineSeparator()
                                + "1.=== Search for a request by name ===" + System.lineSeparator()
@@ -88,7 +91,7 @@ public class StartUITest {
                 new CreateAction(output), new FindByIdAction(output),
                 new ExitAction(output)
         };
-        new StartUI(out).init(input, tracker, actions);
+        new StartUI(out).init(input, memTracker, actions);
         assertThat(out.toString(), is("Menu" + System.lineSeparator()
                                 + "0.=== Create a new Item ====" + System.lineSeparator()
                                 + "1.=== Search for a request by id ===" + System.lineSeparator()
@@ -111,7 +114,7 @@ public class StartUITest {
                 new CreateAction(output), new ShowAllAction(output),
                 new ExitAction(output)
         };
-        new StartUI(out).init(input, tracker, actions);
+        new StartUI(out).init(input, memTracker, actions);
         assertThat(out.toString(), is("Menu" + System.lineSeparator()
                                            + "0.=== Create a new Item ====" + System.lineSeparator()
                                            + "1.=== Show all items ===" + System.lineSeparator()
@@ -134,7 +137,7 @@ public class StartUITest {
     public void whenNotInvalidExitThenInvalidExit() {
         Input input = new StubInput(new String[]{"1", "0"});
         UserAction[] actions = {new ExitAction(out)};
-        new StartUI(out).init(input, tracker, actions);
+        new StartUI(out).init(input, memTracker, actions);
         assertThat(out.toString(), is(
                                             String.format(
                                             "Menu%n"

@@ -1,9 +1,10 @@
 package ru.job4j.tracker.interfeces.action;
 
 import ru.job4j.tracker.Item;
-import ru.job4j.tracker.Tracker;
+import ru.job4j.tracker.MemTracker;
 import ru.job4j.tracker.interfeces.input.Input;
 import ru.job4j.tracker.interfeces.output.Output;
+import ru.job4j.tracker.interfeces.store.Store;
 
 public class FindByIdAction implements UserAction {
     private final Output out;
@@ -18,9 +19,9 @@ public class FindByIdAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store memTracker) {
         int id = input.askInt("Enter id item: ");
-        Item resultSearch = tracker.findById(id);
+        Item resultSearch = memTracker.findById(id);
         if (resultSearch != null) {
             out.println("Result of search: ");
             out.println(resultSearch);

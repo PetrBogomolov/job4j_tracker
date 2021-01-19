@@ -1,10 +1,10 @@
 package ru.job4j.tracker.singltone;
 
-import ru.job4j.tracker.Tracker;
+import ru.job4j.tracker.MemTracker;
 
 public class TrackerStaticFinal {
     private static final TrackerStaticFinal INSTANCE = new TrackerStaticFinal();
-    private Tracker tracker = new Tracker();
+    private MemTracker memTracker = new MemTracker();
 
     private TrackerStaticFinal() {
     }
@@ -13,7 +13,7 @@ public class TrackerStaticFinal {
         return INSTANCE;
     }
 
-    public Tracker getTracker() {
-        return tracker;
+    public MemTracker getTracker() {
+        return memTracker;
     }
 }

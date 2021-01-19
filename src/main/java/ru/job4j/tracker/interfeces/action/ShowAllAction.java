@@ -1,9 +1,11 @@
 package ru.job4j.tracker.interfeces.action;
 
 import ru.job4j.tracker.Item;
-import ru.job4j.tracker.Tracker;
+import ru.job4j.tracker.MemTracker;
 import ru.job4j.tracker.interfeces.input.Input;
 import ru.job4j.tracker.interfeces.output.Output;
+import ru.job4j.tracker.interfeces.store.Store;
+
 import java.util.List;
 
 public class ShowAllAction implements UserAction {
@@ -19,8 +21,8 @@ public class ShowAllAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
-        List<Item> items = tracker.findAll();
+    public boolean execute(Input input, Store memTracker) {
+        List<Item> items = memTracker.findAll();
         for (Item index: items) {
             out.println(index);
         }
