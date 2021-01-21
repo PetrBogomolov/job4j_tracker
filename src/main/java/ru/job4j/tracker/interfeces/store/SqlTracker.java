@@ -11,6 +11,13 @@ import java.util.Properties;
 public class SqlTracker implements Store {
     private Connection connection;
 
+    public SqlTracker(Connection connection) {
+        this.connection = connection;
+    }
+
+    public SqlTracker() {
+    }
+
     @Override
     public void init() {
         ClassLoader loader = SqlTracker.class.getClassLoader();
@@ -32,9 +39,15 @@ public class SqlTracker implements Store {
     @Override
     public Item add(Item item) {
         try (PreparedStatement statement =
-                connection.prepareStatement("INSERT INTO items(name) VALUES (?)")) {
+                connection.prepareStatement("INSERT INTO items(name) VALUES (?)",
+                        Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
-            statement.execute();
+            statement.executeUpdate();
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    item.setId(generatedKeys.getInt(1));
+                }
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

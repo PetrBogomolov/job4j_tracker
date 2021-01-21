@@ -1,9 +1,11 @@
 package ru.job4j.tracker;
 
+import ru.job4j.tracker.interfeces.store.Store;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class MemTracker {
+public class MemTracker implements Store {
     private final List<Item> items = new ArrayList<>();
     private int ids = 1;
 
@@ -13,6 +15,11 @@ public class MemTracker {
                 + "items=" + items
                 + ", ids=" + ids
                 + '}';
+    }
+
+    @Override
+    public void init() {
+
     }
 
     public Item add(Item item) {
@@ -70,5 +77,10 @@ public class MemTracker {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void close() throws Exception {
+
     }
 }
