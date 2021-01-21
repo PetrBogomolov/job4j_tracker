@@ -40,7 +40,7 @@ public class StartUITest {
             config.load(io);
             Class.forName(config.getProperty("driver-class-name"));
             return DriverManager.getConnection(
-                    config.getProperty("url"),
+                    config.getProperty("url_test"),
                     config.getProperty("username"),
                     config.getProperty("password")
 
@@ -157,51 +157,57 @@ public class StartUITest {
     }
 
     @Test
-    public void whenCreateItemDB() throws SQLException {
-        SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()));
-        tracker.add(new Item("name"));
-        assertThat(tracker.findAll().size(), is(1));
+    public void whenCreateItemDB() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()))) {
+            tracker.add(new Item("name"));
+            assertThat(tracker.findAll().size(), is(1));
+        }
     }
 
     @Test
-    public void whenDeleteItemDB() throws SQLException {
-        SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()));
-        Item item = tracker.add(new Item("name"));
-        assertThat(tracker.delete(item.getId()), is(true));
+    public void whenDeleteItemDB() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()))) {
+            Item item = tracker.add(new Item("name"));
+            assertThat(tracker.delete(item.getId()), is(true));
+        }
     }
 
     @Test
-    public void whenEditItemWasItemThenBecomeItemDB() throws SQLException {
-        SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()));
-        Item item = tracker.add(new Item("name"));
-        assertThat(tracker.replace(item.getId(), new Item("new name")), is(true));
+    public void whenEditItemWasItemThenBecomeItemDB() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()))) {
+            Item item = tracker.add(new Item("name"));
+            assertThat(tracker.replace(item.getId(), new Item("new name")), is(true));
+        }
     }
 
     @Test
-    public void whenFindItemByNameDB() throws SQLException {
-        SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()));
-        tracker.add(new Item("name1"));
-        tracker.add(new Item("name1"));
-        tracker.add(new Item("name2"));
-        assertThat(tracker.findByName("name1").size(), is(2));
-        assertThat(tracker.findByName("name2").size(), is(1));
+    public void whenFindItemByNameDB() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()))) {
+            tracker.add(new Item("name1"));
+            tracker.add(new Item("name1"));
+            tracker.add(new Item("name2"));
+            assertThat(tracker.findByName("name1").size(), is(2));
+            assertThat(tracker.findByName("name2").size(), is(1));
+        }
     }
 
     @Test
-    public void whenFindItemByIdDB() throws SQLException {
-        SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()));
-        Item item1 = tracker.add(new Item("name1"));
-        Item item2 = tracker.add(new Item("name2"));
-        assertThat(tracker.findById(item1.getId()), is(item1));
+    public void whenFindItemByIdDB() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()))) {
+            Item item1 = tracker.add(new Item("name1"));
+            Item item2 = tracker.add(new Item("name2"));
+            assertThat(tracker.findById(item1.getId()), is(item1));
+        }
     }
 
     @Test
-    public void whenShowAllDB() throws SQLException {
-        SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()));
-        tracker.add(new Item("name1"));
-        tracker.add(new Item("name2"));
-        tracker.add(new Item("name3"));
-        assertThat(tracker.findAll().size(), is(3));
+    public void whenShowAllDB() throws Exception {
+        try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()))) {
+            tracker.add(new Item("name1"));
+            tracker.add(new Item("name2"));
+            tracker.add(new Item("name3"));
+            assertThat(tracker.findAll().size(), is(3));
+        }
     }
 
     @Test
