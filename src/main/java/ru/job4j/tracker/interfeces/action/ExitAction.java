@@ -1,6 +1,5 @@
 package ru.job4j.tracker.interfeces.action;
 
-import ru.job4j.tracker.MemTracker;
 import ru.job4j.tracker.interfeces.input.Input;
 import ru.job4j.tracker.interfeces.output.Output;
 import ru.job4j.tracker.interfeces.store.Store;

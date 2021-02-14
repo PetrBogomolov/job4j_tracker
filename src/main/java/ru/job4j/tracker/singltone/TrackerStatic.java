@@ -1,6 +1,6 @@
 package ru.job4j.tracker.singltone;
 
-import ru.job4j.tracker.MemTracker;
+import ru.job4j.tracker.interfeces.store.MemTracker;
 
 public class TrackerStatic {
     private static TrackerStatic instance;

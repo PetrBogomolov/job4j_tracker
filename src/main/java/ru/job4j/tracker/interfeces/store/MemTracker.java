@@ -1,7 +1,6 @@
-package ru.job4j.tracker;
+package ru.job4j.tracker.interfeces.store;
 
-import ru.job4j.tracker.interfeces.store.Store;
-
+import ru.job4j.tracker.Item;
 import java.util.ArrayList;
 import java.util.List;
 

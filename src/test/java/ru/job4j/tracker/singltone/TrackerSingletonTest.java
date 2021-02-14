@@ -1,7 +1,7 @@
 package ru.job4j.tracker.singltone;
 
 import org.junit.Test;
-import ru.job4j.tracker.MemTracker;
+import ru.job4j.tracker.interfeces.store.MemTracker;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
