@@ -37,7 +37,9 @@ public class GCTestRun implements UserAction {
         Output output = new ConsoleOutput();
         Input input = new ValidateInput(output, new ConsoleInput(output));
         Store tracker = new MemTracker();
-        UserAction[] actions = {new GCTestRun(output), new ShowAllAction(output), new ExitAction(output)};
+        UserAction[] actions = {
+                new GCTestRun(output), new ShowAllAction(output), new ExitAction(output)
+        };
         new StartUI(output).init(input, tracker, actions);
     }
 }
