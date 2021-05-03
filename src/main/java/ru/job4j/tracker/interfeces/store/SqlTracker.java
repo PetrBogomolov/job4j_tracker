@@ -88,7 +88,7 @@ public class SqlTracker implements Store {
                 connection.prepareStatement("SELECT * FROM items")) {
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    result.add(new Item(resultSet.getInt("id"),
+                    result.add(new Item(
                             resultSet.getString("name")));
                 }
             }
@@ -106,7 +106,7 @@ public class SqlTracker implements Store {
             statement.setString(1, key);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    result.add(new Item(resultSet.getInt("id"),
+                    result.add(new Item(
                             resultSet.getString("name")));
                 }
             }
@@ -124,7 +124,7 @@ public class SqlTracker implements Store {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    item = new Item(resultSet.getInt("id"),
+                    item = new Item(
                             resultSet.getString("name"));
                 }
             }

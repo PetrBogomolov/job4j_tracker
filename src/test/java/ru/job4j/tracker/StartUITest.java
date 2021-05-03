@@ -195,8 +195,7 @@ public class StartUITest {
     public void whenFindItemByIdDB() throws Exception {
         try (SqlTracker tracker = new SqlTracker(ConnectionRollback.create(init()))) {
             Item item1 = tracker.add(new Item("name1"));
-            Item item2 = tracker.add(new Item("name2"));
-            assertThat(tracker.findById(item1.getId()), is(item1));
+            assertThat(tracker.findById(item1.getId()).getName(), is(item1.getName()));
         }
     }
 
