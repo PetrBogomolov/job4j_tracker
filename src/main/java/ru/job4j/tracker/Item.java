@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -10,6 +11,8 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    private String description;
+    private Timestamp created;
 
     public Item() {
     }
@@ -23,12 +26,19 @@ public class Item {
         this.name = name;
     }
 
+    public Item(String name, String description, Timestamp created) {
+        this.name = name;
+        this.description = description;
+        this.created = created;
+    }
+
     @Override
     public String toString() {
         return "Item{"
-                + "id=" + id
-                + ", name='" + name + '\''
-                + '}';
+               + "id=" + id
+               + ", name='" + name
+               + ", description='" + description
+               + ", created=" + created;
     }
 
     public int getId() {
