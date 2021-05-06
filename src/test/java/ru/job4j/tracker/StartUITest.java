@@ -52,7 +52,7 @@ public class StartUITest {
 
     @Test
     public void whenCreateItem() {
-        String[] answers = {"0", "Item name", "1"};
+        String[] answers = {"0", "Item name", "description", "1"};
         Input input = new StubInput(answers);
         UserAction[] actions = {new CreateAction(output), new ExitAction(output)};
         new StartUI(output).init(input, tracker, actions);
@@ -61,7 +61,9 @@ public class StartUITest {
 
     @Test
     public void whenEditItemWasItemThenBecomeItem() {
-        String[] answers = {"0", "was item", "1", "1", "become item", "2"};
+        String[] answers = {
+                "0", "was item", "description", "1", "1", "become item", " new description", "2"
+        };
         Input input = new StubInput(answers);
         UserAction[] actions = {
                 new CreateAction(output), new EditAction(output),
@@ -73,7 +75,7 @@ public class StartUITest {
 
     @Test
     public void whenDeleteItemNewItemThenNull() {
-        String[] answers = {"0", "new item", "1", "1", "2"};
+        String[] answers = {"0", "new item", "description", "1", "1", "2"};
         Input input = new StubInput(answers);
         UserAction[] actions = {
                 new CreateAction(output), new DeletAction(output),
@@ -85,7 +87,7 @@ public class StartUITest {
 
     @Test
     public void whenFindItemByName() {
-        String[] answers = {"0", "Roma", "1", "Roma", "2"};
+        String[] answers = {"0", "Roma", "description", "1", "Roma", "2"};
         Input input = new StubInput(answers);
         UserAction[] actions = {
                 new CreateAction(output), new FindByNameAction(output),
@@ -108,7 +110,7 @@ public class StartUITest {
 
     @Test
     public void whenFindItemById() {
-        String[] answers = {"0", "new item", "1", "1", "2"};
+        String[] answers = {"0", "new item", "description", "1", "1", "2"};
         Input input = new StubInput(answers);
         UserAction[] actions = {
                 new CreateAction(output), new FindByIdAction(output),
@@ -131,7 +133,7 @@ public class StartUITest {
 
     @Test
     public void whenShowAll() {
-        String[] answers = {"0", "Roma", "0", "Dima", "1", "2"};
+        String[] answers = {"0", "name", "description", "1", "2"};
         Input input = new StubInput(answers);
         UserAction[] actions = {
                 new CreateAction(output), new ShowAllAction(output),
@@ -139,10 +141,6 @@ public class StartUITest {
         };
         new StartUI(out).init(input, tracker, actions);
         assertThat(out.toString(), is("Menu" + System.lineSeparator()
-                + "0.=== Create a new Item ====" + System.lineSeparator()
-                + "1.=== Show all items ===" + System.lineSeparator()
-                + "2.=== Exit ===" + System.lineSeparator()
-                + "Menu" + System.lineSeparator()
                 + "0.=== Create a new Item ====" + System.lineSeparator()
                 + "1.=== Show all items ===" + System.lineSeparator()
                 + "2.=== Exit ===" + System.lineSeparator()
